@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Left from "./components/Left";
+import Right from "./components/Right";
+import MyNavBar from "./components/MyNavBar";
+import { Box, Button, Container, Stack } from "@mui/material";
 
 function App() {
+  const [continent, setContinent] = useState("");
+  const [countryData, setCountryData] = useState(undefined);
+  const [favList, setFavList] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header>
+        <MyNavBar />
       </header>
-    </div>
+      <Container sx={{p:4}}>
+        <Stack gap={4}>
+          <Box className="App" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Right
+              continent={continent}
+              countryData={countryData}
+              setFavList={setFavList}
+              favList={favList} />
+            <Left
+              setContinent={setContinent}
+              setCountryData={setCountryData}
+              favList={favList} />
+          </Box>
+        </Stack>
+      </Container>
+    </>
   );
 }
 
